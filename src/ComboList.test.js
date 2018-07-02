@@ -18,7 +18,6 @@ describe('ComboList', () => {
 
         //Assert
         expect(wrapper.find('li')).toHaveLength(3);
-
     });
 
 });

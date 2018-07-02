@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import ComboList from "./ComboList";
+import Scanner from './Scanner';
 
 class App extends Component {
 
@@ -15,21 +16,36 @@ class App extends Component {
             selectedView: '',
         };
     }
+    
+    scanQR = () => {
+        const newState = JSON.parse(JSON.stringify(this.state));
+        newState.selectedView = "Show QR Scanner";
+        super.setState(newState);
+    }
 
     render() {
-        return (
-            <div>
-                <div className="App">
-                    <header className="App-header">
-                        <img src="allstatelogo.jpg" className="App-logo" alt="logo"/>
-                        <h1 className="App-title">Welcome to AllState-Eats</h1>
-                    </header>
-                </div>
-                <div>
-                    <ComboList menu= {this.state.Menu} />
-                </div>
-            </div>
-        );
+            if (this.state.selectedView === "Show QR Scanner"){
+               return(
+                   <Scanner />
+               ) 
+            }
+            else{
+                return(
+                    <div>
+                        <div className="App">
+                            <header className="App-header">
+                                <img src="allstatelogo.jpg" className="App-logo" alt="logo"/>
+                                <h1 className="App-title">Welcome to AllState-Eats</h1>
+                            </header>
+                        </div>
+                        <div>
+                            <ComboList menu= {this.state.Menu} />
+                            <button onClick={this.scanQR}>Test</button>
+                        </div>
+                    </div>
+                )
+            }
+        
     }
 }
 
